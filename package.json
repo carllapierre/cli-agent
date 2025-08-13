@@ -4,9 +4,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "npm run build && node dist/index.js",
-    "typecheck": "tsc --noEmit"
+    "build": "tsc && tsc-alias",
+    "start": "npm run build && node dist/src/index.js",
+    "typecheck": "tsc --noEmit",
+    "reset": "npm run build && node dist/scripts/resetContext.js"
   },
   "dependencies": {
     "@openai/agents": "^0.0.16",
@@ -19,6 +20,7 @@
   "devDependencies": {
     "@types/node": "^20.14.10",
     "tsx": "^4.16.2",
-    "typescript": "^5.5.4"
+    "typescript": "^5.5.4",
+    "tsc-alias": "^1.8.8"
   }
 } 
