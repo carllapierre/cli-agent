@@ -4,11 +4,12 @@ import type { Tool } from "@openai/agents";
 export class BaseAgent {
   protected readonly agent: Agent;
 
-  constructor(name: string, model: string, instructions: string) {
+  constructor(name: string, model: string, instructions: string, responseFormat?: unknown) {
     this.agent = new Agent({
       name,
       instructions,
       model,
+      ...(responseFormat ? { response_format: responseFormat } : {}),
     });
   }
 

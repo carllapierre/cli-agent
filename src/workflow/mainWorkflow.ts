@@ -35,7 +35,13 @@ export class MainWorkflow {
     await appendConversationEntry(this.contextDir, { role: "user", message: text });
 
     const result = await this.orchestrator.runOnce(this.history);
-    const outputText = (result.finalOutput as string | undefined) ?? "";
+    let outputText = "";
+    const fo = result.finalOutput as any;
+    if (fo && typeof fo === "object" && typeof fo.answer === "string") {
+      outputText = fo.answer;
+    } else if (typeof fo === "string") {
+      outputText = fo;
+    }
 
     this.history = result.history;
     await appendConversationEntry(this.contextDir, { role: "assistant", message: outputText });

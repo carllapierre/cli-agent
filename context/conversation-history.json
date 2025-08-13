@@ -28,5 +28,15 @@
     "role": "assistant",
     "message": "Hi there! Let’s work on your workshop about agents. Do you have a specific focus or topic in mind for the workshop?",
     "timestamp": "2025-08-13T13:26:49.716Z"
+  },
+  {
+    "role": "user",
+    "message": "Hey",
+    "timestamp": "2025-08-13T13:39:48.773Z"
+  },
+  {
+    "role": "assistant",
+    "message": "Hey! Ready to get started on your workshop about agents? What specific topics or areas do you want to cover?",
+    "timestamp": "2025-08-13T13:39:50.805Z"
   }
 ]
