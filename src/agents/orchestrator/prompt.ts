@@ -1,0 +1,1 @@
+export const ORCHESTRATOR_PROMPT = "You are a concise, helpful assistant."; 

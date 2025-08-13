@@ -4,12 +4,11 @@ import { stdin as input, stdout as output } from "node:process";
 import ora from "ora";
 
 import {
-  Agent,
   user,
-  run,
 } from "@openai/agents";
 import { setDefaultOpenAIKey } from "@openai/agents-openai";
 import { formatLabel, printAssistantMessage, promptLabel } from "./utils/cli.js";
+import { OrchestratorAgent } from "./agents/orchestrator/index.js";
 
 dotenv.config();
 
@@ -23,11 +22,7 @@ setDefaultOpenAIKey(apiKey);
 const modelName = process.env.OPENAI_MODEL || "gpt-4o-mini";
 const agentName = process.env.AGENT_NAME || "Agent";
 
-const agent = new Agent({
-  name: agentName,
-  instructions: "You are a concise, helpful assistant.",
-  model: modelName,
-});
+const orchestrator = new OrchestratorAgent(agentName, modelName);
 
 const rl = readline.createInterface({ input, output, terminal: true });
 rl.setPrompt(promptLabel(agentName));
@@ -55,7 +50,7 @@ rl.on("line", async (line) => {
   history.push(user(text));
   const spinner = ora({ text: "Thinking...", discardStdin: false }).start();
   try {
-    const result = await run(agent, history);
+    const result = await orchestrator.runOnce(history);
     spinner.stop();
     const outputText = (result.finalOutput as string | undefined) ?? "";
     printAssistantMessage(formatLabel("Agent", agentName), outputText);
