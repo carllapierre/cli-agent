@@ -1,8 +1,7 @@
-export const ORCHESTRATOR_OUTPUT_SCHEMA = {
-  type: "object",
-  properties: {
-    answer: { type: "string", description: "Final answer to respond to the user." },
-  },
-  required: ["answer"],
-  additionalProperties: false,
-} as const; 
+import { z } from "zod";
+
+export const ORCHESTRATOR_OUTPUT_SCHEMA = z.object({
+	answer: z.string().describe("Final answer to respond to the user."),
+});
+
+export type OrchestratorOutput = z.infer<typeof ORCHESTRATOR_OUTPUT_SCHEMA>; 
